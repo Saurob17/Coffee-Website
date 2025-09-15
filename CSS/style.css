@@ -11,7 +11,7 @@
   --white-color: #fff;
   --dark-color: #252525;
   --primary-color: #3b141c;
-  --secondary-color: #f3961c;
+  --secondary-color: #ec8d10;
   --light-pink-color: #faf4f5;
   --madium-gray-color: #ccc;
 
@@ -62,6 +62,24 @@ img {
   padding: 0 1px;
   max-width: var(--site-max-width);
 }
+
+.section-title{
+  text-align: center;
+  padding: 60px 0 40px;
+  text-transform: uppercase;
+  font-size: var(--font-size-xl);
+   position: relative;
+}
+.section-title::after{
+  content: "";
+  width: 80px;
+  height: 5px;
+  display: block;
+  border-radius: var(--border-radius-s);
+  background: var(--secondary-color);
+   margin: 10px auto 0; 
+}
+
 /* Navbar styling  */
 header {
   position: fixed;
@@ -99,7 +117,7 @@ header .navbar {
   background: var(--secondary-color);
   background: var(--secondary-color);
 }
-.navbar :where(#manu-close-button, #menu-open-button) {
+.navbar :where(#menu-close-button, #menu-open-button) {
   display: none;
 }
 
@@ -171,8 +189,66 @@ header .navbar {
   background: var(--secondary-color);
 }
 
-/* Repossiv media query code for max width 900px */
+.about-section{
+  padding: 120px 0;
+  background:var(--light-pink-color);
+}
+.about-section .section-content {
+  display: flex;
+  gap:50px;
+  align-items: center;
+  justify-content: space-between;
+}
+.about-section .about-image-wrapper .about-image{
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: var(--border-radius-circle);
+}
+.about-section .about-details .about-title{
+  padding: 0;
+}
+.about-section .about-details{
+  max-width: 50%;
+}
 
+.about-section .about-details .text{
+  line-height: 30px;
+  margin: 50px  0 30px;
+  text-align: center;
+  font-size: var(--font-size-m);
+}
+.about-section .social-link-list{
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+}
+
+.about-section .social-link-list .social-link{
+  color: var(--primary-color);
+  font-size: var(--font-size-1);
+}
+
+.about-section .social-link-list .social-link:hover{
+  color: var(--secondary-color);
+}
+
+.menu-section .menu-list{
+display: flex;
+flex-wrap: wrap;
+gap: 110px;
+align-items: center;
+}
+.menu-section .menu-list .menue-item{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: calc(100%/3-110px);
+}
+/* Repossiv media query code for max width 900px */
 @media screen and (max-width: 900px) {
   :root {
     --font-size-m: 1rem;
@@ -181,8 +257,35 @@ header .navbar {
     --font-size-xxl: 1.8rem;
   }
 
-  .navbar :where(#manu-close-button, #menu-open-button) {
-    font-size: var(--font-size-1);
+  /* show buttons in mobile */
+  #menu-open-button,
+  #menu-close-button {
+    display: block;
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+
+  body.show-mobile-menu header::befor {
+    content: "";
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  /* close button positioning */
+  #menu-close-button {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    color: var(--dark-color);
+  }
+
+  #menu-open-button {
+    color: var(--white-color);
   }
 
   .navbar #manu-close-button {
@@ -197,7 +300,7 @@ header .navbar {
   .navbar .nav-menu {
     display: block;
     position: fixed;
-    left: 0;
+    left: -300px;
     top: 0;
     display: flex;
     width: 300px;
@@ -206,6 +309,10 @@ header .navbar {
     flex-direction: column;
     padding-top: 100px;
     align-items: center;
+    transition: left 0.3s ease;
+  }
+  body.show-mobile-menu .nav-menu {
+    left: 0;
   }
 
   .navbar .nav-menu .nav-link {
@@ -213,5 +320,42 @@ header .navbar {
     display: block;
     margin: top 17px;
     font-size: var(--font-size-1);
+  }
+
+  .hero-section .section-content {
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    text-align: center;
+    padding: 30px 20px;
+    
+  }
+
+  .hero-section .hero-details :is(.subtitle, .description),.about-details .about-section {
+    max-width: 250px;
+    margin: 0 auto;
+  }
+
+  .hero-section .hero-details .button {
+    justify-content: center;
+  }
+
+  .hero-section .hero-image-wrapper {
+    max-width: 270px;
+    margin: 0;
+  }
+
+  .about-section .section-content{
+    gap:70px;
+    flex-direction: column;
+
+  }
+
+  .about-section .about-image-wrapper .about-image{
+    width: 100%;
+    height: 100%;
+    max-width: 250px;
+    aspect-ratio: 1;
   }
 }
